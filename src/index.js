@@ -6,13 +6,16 @@ import { store, persistor } from './redux/store';
 import { App } from 'components/App';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter basename="/expense-tracker-app">
-          <App />        
+          <ChakraProvider>
+            <App />
+          </ChakraProvider>
         </BrowserRouter>
       </PersistGate>
     </Provider>
