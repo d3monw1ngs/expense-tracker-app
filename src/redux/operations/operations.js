@@ -1,12 +1,28 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchCurrentUser } from "../../api/userApi";
+import axios from 'axios';
 
-export const getCurrentUser = createAsyncThunk('auth/getCurrentUser', 
+axios.defaults.baseURL = 'https://expense-tracker.b.goit.study/api';
+
+export const fetchCurrentUser = createAsyncThunk(
+    'auth/fetchCurrentUser', 
     async (_, { rejectWithValue }) => {
         try {
-            const user = await fetchCurrentUser();
-            return user;
+            const response = await axios.get('/user');
+            return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data);
         }
-    });
+    }
+);
+
+export const fetchTransactions = createAsyncThunk(
+    'transactions/fetchTransactions',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await axios.get('/transactions');
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);

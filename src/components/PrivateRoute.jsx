@@ -1,9 +1,17 @@
 import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectIsAuthenticated } from '../redux/selectors/selectors';
+import { selectIsAuthenticated } from '../redux/selectors';
 
-export const PrivateRoute = () => {
+export const PrivateRoute = ({ component: Component, ...rest }) => {
     const isAuthenticated = useSelector(selectIsAuthenticated);
-    return isAuthenticated ? <Outlet /> : <Navigate to="/auth" />;
+   
+    return (
+        <Route
+            {...rest}
+            render={(props) => 
+                isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />
+            }
+        />
+    );
 };

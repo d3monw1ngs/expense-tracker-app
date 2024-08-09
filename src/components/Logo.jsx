@@ -1,11 +1,10 @@
 import React from 'react';
-import { Box, Image } from '@chakra-ui/react';
-import logoImage from '../../assets/Icon.jpg';
+import { Text } from '@chakra-ui/react';
 
 export const Logo = () => {
   return (
-   <Box>
-        <Image src={logoImage} alt="Expense Tracker Logo" boxSize="50px" />
-   </Box>
+   <Text fontSize="2x1" fontWeight="bold">
+      Expense Tracker
+   </Text>
   );
 };
