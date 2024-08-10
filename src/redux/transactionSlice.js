@@ -3,11 +3,7 @@ import { fetchTransactions } from "./operations/operations";
 
 const transactionsSlice = createSlice({
     name: 'transactions',
-    initialState: {
-        items: [],
-        loading: false,
-        error: null,
-    },
+    initialState: [],
     extraReducers: (builder) => {
         builder
             .addCase(fetchTransactions.pending, (state) => {

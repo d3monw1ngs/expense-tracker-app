@@ -1,14 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectIsAuthenticated } from '../redux/selectors';
+import { Header } from '../components/Header';
 
 export const SharedLayout = () => {
-    const isAuthenticated = useSelector(selectIsAuthenticated);
-
   return (
     <div>
-        {!isAuthenticated }
+        <Header />
         <Outlet />
     </div>
   );

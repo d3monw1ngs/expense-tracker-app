@@ -1,21 +1,24 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
-import { Logo } from './Logo';
-import { TransactionHistoryNav } from './TransactionHistoryNav';
-import { UserBarBtn } from './UserBarBtn';
-import { BurgerMenuBtn } from './BurgerMenuBtn';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../redux/selectors';
+import { Box, Flex, Heading } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+// import { Logo } from './Logo';
 
 export const Header = () => {
+  const user = useSelector(selectUser);
+  if(!user || !user.name) {
+    return <div>Loading...</div>;
+  }
+
+  const { name } = user;
+
   return (
-    <Box display="flex" justifyContent="space-between" p="4">
-      <Logo />
-      <Box display={{ base: 'none', md: 'flex' }}>
-        <TransactionHistoryNav />
-        <UserBarBtn />
-      </Box>
-      <Box display={{ base: 'block', md: 'none' }}>
-        <BurgerMenuBtn />
-      </Box>
-    </Box>
+    <Flex as="header" justify="space-between" align="center" padding="1.5rem" bg="teal.500" color="white">
+      <Link to="/">
+        <Heading size="lg">Expense Tracker</Heading>
+      </Link>
+      {name && <Box>{name}</Box>}
+    </Flex>
   );
 };
